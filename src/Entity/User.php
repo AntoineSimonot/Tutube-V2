@@ -70,10 +70,28 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $comments;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Video::class, mappedBy="views")
+     */
+    private $videos_seen;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=User::class, inversedBy="followers")
+     */
+    private $follower;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="follower")
+     */
+    private $followers;
+
     public function __construct()
     {
         $this->videos = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->videos_seen = new ArrayCollection();
+        $this->follower = new ArrayCollection();
+        $this->followers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -259,6 +277,65 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         return $this;
+    }
+
+    /**
+     * @return Collection|Video[]
+     */
+    public function getVideosSeen(): Collection
+    {
+        return $this->videos_seen;
+    }
+
+    public function addVideosSeen(Video $videosSeen): self
+    {
+        if (!$this->videos_seen->contains($videosSeen)) {
+            $this->videos_seen[] = $videosSeen;
+            $videosSeen->addView($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVideosSeen(Video $videosSeen): self
+    {
+        if ($this->videos_seen->removeElement($videosSeen)) {
+            $videosSeen->removeView($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|self[]
+     */
+    public function getFollower(): Collection
+    {
+        return $this->follower;
+    }
+
+    public function addFollower(self $follower): self
+    {
+        if (!$this->follower->contains($follower)) {
+            $this->follower[] = $follower;
+        }
+
+        return $this;
+    }
+
+    public function removeFollower(self $follower): self
+    {
+        $this->follower->removeElement($follower);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|self[]
+     */
+    public function getFollowers(): Collection
+    {
+        return $this->followers;
     }
 
 }

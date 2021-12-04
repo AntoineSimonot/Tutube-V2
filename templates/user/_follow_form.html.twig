@@ -1,0 +1,3 @@
+<form method="post" action="{{ path('user_follow', {'user_id': user.id, 'current_user': app.user.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+    <button class="btn">follow</button>
+</form>

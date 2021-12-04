@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Video index{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 >Video followed</h1>
+        <div class="row">
+            <div class="col-3">
+                {% for tutubeur in app.user.followers %}
+                    <li><a href="{{ path('user_show', {'id': tutubeur.id}) }}">{{ tutubeur.pseudo }}</a></li>
+                {% endfor %}
+            </div>
+            <div class="col-9 row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                {% for video in videos %}
+                    <div class="col mb-5">
+                        <div class="card h-100 v-300">
+                            <!-- Sale badge-->
+                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">
+                                {{ video.views.count() }}</div>
+                            <!-- Product image-->
+                            <iframe class="card-img-top" src="{{ video.link }}"></iframe>
+                            <!-- Product details-->
+                            <div class="card-body p-2">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">{{ video.name }}</h5>
+                                    <span class="text-muted text-decoration-line-through">{{ video.description }}</span> -
+                                    <span class="text-muted text-decoration-line-through">{{ video.user.pseudo }}</span>
+
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{{ path('video_show', {'id': video.id}) }}">Show</a></div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

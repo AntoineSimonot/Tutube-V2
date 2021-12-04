@@ -23,7 +23,7 @@ final class Versions
      * @deprecated please use {@see self::rootPackageName()} instead.
      *             This constant will be removed in version 2.0.0.
      */
-    const ROOT_PACKAGE_NAME = 'symfony/website-skeleton';
+    const ROOT_PACKAGE_NAME = '__root__';
 
     /**
      * Array of all available composer packages.
@@ -52,6 +52,8 @@ final class Versions
   'doctrine/sql-formatter' => '1.1.1@56070bebac6e77230ed7d306ad13528e60732871',
   'egulias/email-validator' => '3.1.2@ee0db30118f661fb166bcffbf5d82032df484697',
   'friendsofphp/proxy-manager-lts' => 'v1.0.5@006aa5d32f887a4db4353b13b5b5095613e0611f',
+  'knplabs/knp-components' => 'v3.3.0@03e8ad16261dd8a70a8c6e01f18eb3852437546e',
+  'knplabs/knp-paginator-bundle' => 'v5.7.0@d5608abc236b6896a413a924a6637738da9705eb',
   'laminas/laminas-code' => '4.4.3@bb324850d09dd437b6acb142c13e64fdc725b0e1',
   'monolog/monolog' => '2.3.5@fd4380d6fc37626e2f799f29d91195040137eba9',
   'phpdocumentor/reflection-common' => '2.2.0@1d01c49d4ed62f25aa84a747ad35d5a16924662b',
@@ -104,7 +106,7 @@ final class Versions
   'symfony/process' => 'v5.3.7@38f26c7d6ed535217ea393e05634cb0b244a1967',
   'symfony/property-access' => 'v5.3.8@2fbab5f95ddb6b8e85f38a6a8a04a17c0acc4d66',
   'symfony/property-info' => 'v5.3.8@39de5bed8c036f76ec0457ec52908e45d5497947',
-  'symfony/proxy-manager-bridge' => 'v5.3.4@76e61f33f6a34a340bf6e02211214f466e8e1dba',
+  'symfony/proxy-manager-bridge' => 'v5.3.11@c774a6a852fd702154414e76f8dcd4e96086c2a8',
   'symfony/routing' => 'v5.3.7@be865017746fe869007d94220ad3f5297951811b',
   'symfony/runtime' => 'v5.3.10@115eebbe287b35d65bd7b062bf3362e135941a59',
   'symfony/security-bundle' => 'v5.3.8@b755ed5d11685ba9aaa27b060250e5a57371f37f',
@@ -163,10 +165,10 @@ final class Versions
   'symfony/phpunit-bridge' => 'v5.3.10@325aaf6302501ed3673cffbd3ba88db5949de8ae',
   'symfony/web-profiler-bundle' => 'v5.3.8@9ba1e05fdc7a46979047ba6c8949bd35e3a386a5',
   'theseer/tokenizer' => '1.2.1@34a41e998c2183e22995f158c581e7b5e755ab9e',
-  'symfony/polyfill-ctype' => '*@',
-  'symfony/polyfill-iconv' => '*@',
-  'symfony/polyfill-php72' => '*@',
-  'symfony/website-skeleton' => 'v5.3.99@',
+  'symfony/polyfill-ctype' => '*@19c4d41ed83d7d2540574382af698d3d9552a274',
+  'symfony/polyfill-iconv' => '*@19c4d41ed83d7d2540574382af698d3d9552a274',
+  'symfony/polyfill-php72' => '*@19c4d41ed83d7d2540574382af698d3d9552a274',
+  '__root__' => 'dev-master@19c4d41ed83d7d2540574382af698d3d9552a274',
 );
 
     private function __construct()

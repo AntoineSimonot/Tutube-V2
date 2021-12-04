@@ -3,46 +3,56 @@
 {% block title %}Video{% endblock %}
 
 {% block body %}
-    <h1>Video</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ video.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ video.name }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ video.description }}</td>
-            </tr>
-            <tr>
-                <th>Created_at</th>
-                <td>{{ video.createdAt ? video.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>User</th>
-                <td>{{ video.user.pseudo }}</td>
-            </tr>
-            <tr>
-                <th>Link</th>
-                <td>{{ video.link }}</td>
-            </tr>
-        </tbody>
-    </table>
+<div class="container">
 
-    <a href="{{ path('video_index') }}">back to list</a>
+<main role="main" class="container">
+    <div class="row">
+        <div class="col-md-8 blog-main">
+            <div class="blog-post">
+                <span><a href="{{ path('video_index') }}">-> back to list</a></span>
 
-    <a href="{{ path('video_edit', {'id': video.id}) }}">edit</a>
+                <h2 class="blog-post-title">{{ video.name }} </h2>
+                <p class="blog-post-meta">{{ video.createdAt ? video.createdAt|date('Y-m-d H:i:s') : '' }} by <a href="#">{{ video.user.pseudo }} - {{ video.views.count() }} views</a></p>
+                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                    <a class="btn btn-secondary mb-3" href="{{ path('video_add_view', {'id': video.id}) }}">add view</a>
+                {% endif %}
+                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') and app.user.id == video.user.id %}
+                    {{ include('video/_delete_form.html.twig') }}
+                {%  endif %}
+                <iframe class="mt-4" style="width: 100%; height: 400px;" src="{{ video.link }}"></iframe>
+            </div><!-- /.blog-post -->
 
-    <iframe width="420" height="315"
-            src="{{ video.link }}">
-    </iframe>
-    {{ include('video/_delete_form.html.twig') }}
+            <div class="blog-post">
+                <h4>Post Comment</h4>
+                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                    {{ include('comment/_form.html.twig', {'button_label': 'Create'}) }}
+                {% else %}
+                    <p>You must be logged to post a comment</p>
+                {%  endif %}
+            </div>
 
-    {{ include('comment/_form.html.twig', {'button_label': 'Update'}) }}
+        </div><!-- /.blog-main -->
+
+        <aside class="col-md-4 blog-sidebar">
+            <h3>Comments</h3>
+
+            {% for comment in video.comments %}
+                <span style="font-weight: bold">
+                      {{ comment.user.pseudo }}
+                  </span>
+                -
+                <span>
+                      {{ comment.content }}
+                  </span>
+                <div style="width: 100%; height: 1px; background-color: black; margin: 10px 0"></div>
+            {% endfor %}
+
+
+        </aside><!-- /.blog-sidebar -->
+
+    </div><!-- /.row -->
+
+</main><!-- /.container -->
 
 {% endblock %}

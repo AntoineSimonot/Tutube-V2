@@ -77,6 +77,13 @@ class CommentController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('comment_index', [], Response::HTTP_SEE_OTHER);
+        $getRoles = $this->getUser()->getRoles();
+        if (in_array("ROLE_ADMIN", $getRoles))
+        {
+            return $this->redirectToRoute('admin_video_show', ["id" => $comment->getVideo()->getId()], Response::HTTP_SEE_OTHER);
+        }
+        else{
+            return $this->redirectToRoute('comment_index', [], Response::HTTP_SEE_OTHER);
+        }
     }
 }

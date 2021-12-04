@@ -3,39 +3,50 @@
 {% block title %}Video index{% endblock %}
 
 {% block body %}
-    <h1>Video index</h1>
+            <div class="container">
+                <h1 >{{ title }}</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Created_at</th>
-                <th>Link</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for video in videos %}
-            <tr>
-                <td>{{ video.id }}</td>
-                <td>{{ video.name }}</td>
-                <td>{{ video.description }}</td>
-                <td>{{ video.createdAt ? video.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ video.link }}</td>
-                <td>
-                    <a href="{{ path('video_show', {'id': video.id}) }}">show</a>
-                    <a href="{{ path('video_edit', {'id': video.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+                <form  method="get">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <button class="btn btn-outline-secondary" type="submit" value="Submit">Search</button>
+                        </div>
+                        <input class="form-control" type="search" name="search" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                    </div>
 
-    <a href="{{ path('video_new') }}">Create new</a>
+                </form>
+                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                    <a class="mb-5" href="{{ path('video_new') }}">Create new</a>
+                {%  endif %}
+                {{ knp_pagination_render(videos) }}
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                    {% for video in videos %}
+                        <div class="col mb-5">
+                            <div class="card h-100">
+                                <!-- Sale badge-->
+                                <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">
+                                    {{ video.views.count() }}</div>
+                                <!-- Product image-->
+                                <iframe class="card-img-top" src="{{ video.link }}"></iframe>
+                                <!-- Product details-->
+                                <div class="card-body p-2">
+                                    <div class="text-center">
+                                        <!-- Product name-->
+                                        <h5 class="fw-bolder">{{ video.name }}</h5>
+                                        <span class="text-muted text-decoration-line-through">{{ video.description }}</span> -
+                                        <span class="text-muted text-decoration-line-through">{{ video.user.pseudo }}</span>
+                                        <h5 class="fw-bolder">{{ video.createdAt ? video.createdAt|date('Y-m-d H:i:s') : ''}}</h5>
+
+                                    </div>
+                                </div>
+                                <!-- Product actions-->
+                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                    <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{{ path('video_show', {'id': video.id}) }}">Show</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
 {% endblock %}

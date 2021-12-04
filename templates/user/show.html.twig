@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('asset/style_user.css') }}">
+{% endblock %}
+
+{% block title %}User index{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div>
+            <h5 class="mb-3">User</h5>
+            <a href="{{ path('user_index') }}">-> back to list</a>
+        </div>
+        <div class="d-flex justify-content-center">
+            <div class="col-md-6 center">
+                <div class="card user-card">
+                    <div class="card-header">
+                        <h5>Profile</h5>
+                    </div>
+                    <div class="card-block">
+                        <h6 class="f-w-600 m-t-25 m-b-10">{{ user.pseudo }}</h6>
+                        <p class="text-muted">{{ user.firstname }} | {{ user.lastname }}</p>
+                        {% if app.user.id is defined and app.user.id != user.id %}
+                                {% if app.user.email not in user.follower.values %}
+                                    <form action="{{ path('user_follow', {'user': user.id, 'follow': 'follow'}) }}" method="post">
+                                        <input class="btn btn-primary" type="submit" value="Follow">
+                                    </form>
+                                {% else %}
+                                    <form action="{{ path('user_follow', {'user': user.id, 'follow': 'unfollow'}) }}" method="post">
+                                        <input class="btn btn-secondary"  type="submit" value="unfollow">
+                                    </form>
+                                {% endif %}
+                        {% endif %}
+                        <div class="bg-c-yellow counter-block m-t-10 p-20">
+                            <div class="row">
+                                <div class="col-4">
+                                    <i class="fas fa-video"></i>
+                                    <p>{{ user.videos.count() }}</p>
+                                </div>
+                                <div class="col-4">
+                                    <i class="fas fa-eye"></i>
+                                    <p>{{ countAllViews }}</p>
+                                </div>
+                                <div class="col-4">
+                                    <i class="fa fa-user"></i>
+                                    <p>{{ user.follower.count() }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="py-5">
+            <div class="container px-4 px-lg-5 mt-5">
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                    {% for video in user.videos %}
+                        <div class="col mb-5">
+                            <div class="card h-100">
+                                <!-- Sale badge-->
+                                <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">
+                                    {{ video.views.count() }}</div>
+                                <!-- Product image-->
+                                <iframe class="card-img-top" src="{{ video.link }}"></iframe>
+                                <!-- Product details-->
+                                <div class="card-body p-2">
+                                    <div class="text-center">
+                                        <!-- Product name-->
+                                        <h5 class="fw-bolder">{{ video.name }}</h5>
+                                        <span class="text-muted text-decoration-line-through">{{ video.description }}</span>
+                                    </div>
+                                </div>
+                                <!-- Product actions-->
+                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                    <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{{ path('video_show', {'id': video.id}) }}">Show</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}
+

@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('asset/style_user.css') }}">
+{% endblock %}
+
+{% block title %}User index{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h5 class="mb-3">Users</h5>
+        <div class="row">
+        {% for user in users %}
+            <div class="col-md-4">
+                <a href="{{ path('user_show', {'id': user.id}) }}">
+
+                <div class="card user-card">
+                        <div class="card-header">
+                            <h5>Profile</h5>
+                        </div>
+                        <div class="card-block">
+                            <h6 class="f-w-600 m-t-25 m-b-10">{{ user.pseudo }}</h6>
+                            <p class="text-muted">{{ user.firstname }} | {{ user.lastname }}</p>
+                            <hr>
+                            {% if app.user.id is defined %}
+                                 {% if app.user.id != user.id %}
+                                    {% if app.user.email not in user.follower.values %}
+                                        <form action="{{ path('user_follow', {'user': user.id, 'follow': 'follow'}) }}" method="post">
+                                            <input class="btn btn-primary" type="submit" value="Follow">
+                                        </form>
+                                    {% else %}
+                                        <form action="{{ path('user_follow', {'user': user.id, 'follow': 'unfollow'}) }}" method="post">
+                                            <input class="btn btn-secondary"  type="submit" value="unfollow">
+                                        </form>
+                                    {% endif %}
+                                 {% endif %}
+                            {% endif %}
+
+                            <div class="bg-c-yellow counter-block m-t-10 p-20">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <i class="fas fa-video"></i>
+                                        <p>{{ user.videos.count() }}</p>
+                                    </div>
+                                    <div class="col-6">
+                                        <i class="fa fa-user"></i>
+                                        <p>{{ user.follower.count() }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+

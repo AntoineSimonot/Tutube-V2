@@ -27,16 +27,25 @@ class InstalledVersions
 private static $installed = array (
   'root' => 
   array (
-    'pretty_version' => 'v5.3.99',
-    'version' => '5.3.99.0',
+    'pretty_version' => 'dev-master',
+    'version' => 'dev-master',
     'aliases' => 
     array (
     ),
-    'reference' => NULL,
-    'name' => 'symfony/website-skeleton',
+    'reference' => '19c4d41ed83d7d2540574382af698d3d9552a274',
+    'name' => '__root__',
   ),
   'versions' => 
   array (
+    '__root__' => 
+    array (
+      'pretty_version' => 'dev-master',
+      'version' => 'dev-master',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '19c4d41ed83d7d2540574382af698d3d9552a274',
+    ),
     'composer/package-versions-deprecated' => 
     array (
       'pretty_version' => '1.11.99.4',
@@ -207,6 +216,24 @@ private static $installed = array (
       array (
       ),
       'reference' => '006aa5d32f887a4db4353b13b5b5095613e0611f',
+    ),
+    'knplabs/knp-components' => 
+    array (
+      'pretty_version' => 'v3.3.0',
+      'version' => '3.3.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '03e8ad16261dd8a70a8c6e01f18eb3852437546e',
+    ),
+    'knplabs/knp-paginator-bundle' => 
+    array (
+      'pretty_version' => 'v5.7.0',
+      'version' => '5.7.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'd5608abc236b6896a413a924a6637738da9705eb',
     ),
     'laminas/laminas-code' => 
     array (
@@ -1099,12 +1126,12 @@ private static $installed = array (
     ),
     'symfony/proxy-manager-bridge' => 
     array (
-      'pretty_version' => 'v5.3.4',
-      'version' => '5.3.4.0',
+      'pretty_version' => 'v5.3.11',
+      'version' => '5.3.11.0',
       'aliases' => 
       array (
       ),
-      'reference' => '76e61f33f6a34a340bf6e02211214f466e8e1dba',
+      'reference' => 'c774a6a852fd702154414e76f8dcd4e96086c2a8',
     ),
     'symfony/routing' => 
     array (
@@ -1299,15 +1326,6 @@ private static $installed = array (
       array (
       ),
       'reference' => '9ba1e05fdc7a46979047ba6c8949bd35e3a386a5',
-    ),
-    'symfony/website-skeleton' => 
-    array (
-      'pretty_version' => 'v5.3.99',
-      'version' => '5.3.99.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => NULL,
     ),
     'symfony/yaml' => 
     array (

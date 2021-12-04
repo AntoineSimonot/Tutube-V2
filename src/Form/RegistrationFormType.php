@@ -21,6 +21,11 @@ class RegistrationFormType extends AbstractType
             ->add('firstname')
             ->add('lastname')
             ->add('pseudo')
+            ->add('roles', CheckboxType::class, [
+                'mapped' => false,
+                'label' => 'Admin?',
+                'required' => false
+            ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [

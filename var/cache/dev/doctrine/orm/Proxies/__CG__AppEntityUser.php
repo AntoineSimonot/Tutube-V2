@@ -66,10 +66,10 @@ class User extends \App\Entity\User implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\User' . "\0" . 'id', '' . "\0" . 'App\\Entity\\User' . "\0" . 'email', '' . "\0" . 'App\\Entity\\User' . "\0" . 'roles', '' . "\0" . 'App\\Entity\\User' . "\0" . 'password', '' . "\0" . 'App\\Entity\\User' . "\0" . 'firstname', '' . "\0" . 'App\\Entity\\User' . "\0" . 'lastname', '' . "\0" . 'App\\Entity\\User' . "\0" . 'pseudo', '' . "\0" . 'App\\Entity\\User' . "\0" . 'videos', '' . "\0" . 'App\\Entity\\User' . "\0" . 'comments'];
+            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\User' . "\0" . 'id', '' . "\0" . 'App\\Entity\\User' . "\0" . 'email', '' . "\0" . 'App\\Entity\\User' . "\0" . 'roles', '' . "\0" . 'App\\Entity\\User' . "\0" . 'password', '' . "\0" . 'App\\Entity\\User' . "\0" . 'firstname', '' . "\0" . 'App\\Entity\\User' . "\0" . 'lastname', '' . "\0" . 'App\\Entity\\User' . "\0" . 'pseudo', '' . "\0" . 'App\\Entity\\User' . "\0" . 'videos', '' . "\0" . 'App\\Entity\\User' . "\0" . 'comments', '' . "\0" . 'App\\Entity\\User' . "\0" . 'videos_seen', '' . "\0" . 'App\\Entity\\User' . "\0" . 'follower', '' . "\0" . 'App\\Entity\\User' . "\0" . 'followers'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\User' . "\0" . 'id', '' . "\0" . 'App\\Entity\\User' . "\0" . 'email', '' . "\0" . 'App\\Entity\\User' . "\0" . 'roles', '' . "\0" . 'App\\Entity\\User' . "\0" . 'password', '' . "\0" . 'App\\Entity\\User' . "\0" . 'firstname', '' . "\0" . 'App\\Entity\\User' . "\0" . 'lastname', '' . "\0" . 'App\\Entity\\User' . "\0" . 'pseudo', '' . "\0" . 'App\\Entity\\User' . "\0" . 'videos', '' . "\0" . 'App\\Entity\\User' . "\0" . 'comments'];
+        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\User' . "\0" . 'id', '' . "\0" . 'App\\Entity\\User' . "\0" . 'email', '' . "\0" . 'App\\Entity\\User' . "\0" . 'roles', '' . "\0" . 'App\\Entity\\User' . "\0" . 'password', '' . "\0" . 'App\\Entity\\User' . "\0" . 'firstname', '' . "\0" . 'App\\Entity\\User' . "\0" . 'lastname', '' . "\0" . 'App\\Entity\\User' . "\0" . 'pseudo', '' . "\0" . 'App\\Entity\\User' . "\0" . 'videos', '' . "\0" . 'App\\Entity\\User' . "\0" . 'comments', '' . "\0" . 'App\\Entity\\User' . "\0" . 'videos_seen', '' . "\0" . 'App\\Entity\\User' . "\0" . 'follower', '' . "\0" . 'App\\Entity\\User' . "\0" . 'followers'];
     }
 
     /**
@@ -442,6 +442,83 @@ class User extends \App\Entity\User implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeComment', [$comment]);
 
         return parent::removeComment($comment);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getVideosSeen(): \Doctrine\Common\Collections\Collection
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getVideosSeen', []);
+
+        return parent::getVideosSeen();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function addVideosSeen(\App\Entity\Video $videosSeen): \App\Entity\User
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addVideosSeen', [$videosSeen]);
+
+        return parent::addVideosSeen($videosSeen);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function removeVideosSeen(\App\Entity\Video $videosSeen): \App\Entity\User
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeVideosSeen', [$videosSeen]);
+
+        return parent::removeVideosSeen($videosSeen);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getFollower(): \Doctrine\Common\Collections\Collection
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getFollower', []);
+
+        return parent::getFollower();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function addFollower(\App\Entity\User $follower): \App\Entity\User
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addFollower', [$follower]);
+
+        return parent::addFollower($follower);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function removeFollower(\App\Entity\User $follower): \App\Entity\User
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeFollower', [$follower]);
+
+        return parent::removeFollower($follower);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getFollowers(): \Doctrine\Common\Collections\Collection
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getFollowers', []);
+
+        return parent::getFollowers();
     }
 
 }

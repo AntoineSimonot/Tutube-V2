@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Video{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+
+    <main role="main" class="container">
+        <div class="row">
+            <div class="col-md-8 blog-main">
+                <div class="blog-post">
+                    <span><a href="{{ path('admin_video') }}">-> back to list</a></span>
+
+                    <h2 class="blog-post-title">{{ video.name }}</h2>
+                    <p class="blog-post-meta">{{ video.createdAt ? video.createdAt|date('Y-m-d H:i:s') : '' }} by <a href="{{ path('admin_user_show', {'id': video.user.id}) }}">{{ video.user.pseudo }}</a></p>
+                    {{ include('video/_delete_form.html.twig') }}
+
+                    </div><!-- /.blog-post -->
+            </div><!-- /.blog-main -->
+        </div><!-- /.row -->
+
+        <h3>Comments</h3>
+
+        {% for comment in video.comments %}
+            <span style="font-weight: bold">
+                      {{ comment.user.pseudo }}
+                  </span>
+            -
+            <span>
+                      {{ comment.content }}
+                  </span>
+            {{ include('comment/_delete_form.html.twig') }}
+
+            <div style="width: 100%; height: 1px; background-color: black; margin: 10px 0"></div>
+        {% endfor %}
+
+    </main><!-- /.container -->
+
+{% endblock %}

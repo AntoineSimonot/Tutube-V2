@@ -31,6 +31,7 @@ class Video
 
     /**
      * @ORM\Column(type="datetime_immutable")
+     * @ORM\OrderBy({"order" = "DESC", "id" = "DESC"})
      */
     private $created_at;
 
@@ -46,14 +47,20 @@ class Video
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="video")
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="video", orphanRemoval=true)
      */
     private $comments;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=User::class, inversedBy="videos_seen")
+     */
+    private $views;
 
     public function __construct()
     {
         $this->created_at = new \DateTime();
         $this->comments = new ArrayCollection();
+        $this->views = new ArrayCollection();
     }
 
     public function __toString()
@@ -152,6 +159,30 @@ class Video
                 $comment->setVideo(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getViews(): Collection
+    {
+        return $this->views;
+    }
+
+    public function addView(User $view): self
+    {
+        if (!$this->views->contains($view)) {
+            $this->views[] = $view;
+        }
+
+        return $this;
+    }
+
+    public function removeView(User $view): self
+    {
+        $this->views->removeElement($view);
 
         return $this;
     }
